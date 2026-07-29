@@ -1,2 +1,1 @@
-# SteigleiterCheck
-test
+# SteigleiterCheck v0.1.0
