@@ -2,104 +2,50 @@
 <html lang="de">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SteigleiterCheck</title>
-
-    <meta name="theme-color"
-          content="#0f172a">
-
-    <link rel="manifest"
-          href="manifest.json">
-
-    <link rel="stylesheet"
-          href="style.css">
-
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="topbar">
-
     <div>
-
         <h1>🪜 SteigleiterCheck</h1>
-
-        <p>
-            IndustryServiceHuber
-        </p>
-
+        <p>IndustryServiceHuber</p>
     </div>
-
 </header>
 
-
 <main>
+    <section class="search">
+        <input id="search" type="text" placeholder="Steigleiter suchen...">
+    </section>
 
-<section class="search">
-
-<input
-        id="search"
-        type="text"
-        placeholder="Steigleiter suchen...">
-
-</section>
-
-
-<section id="cards">
-
-</section>
-
+    <section id="cards"></section>
 </main>
 
-
-
 <template id="leiter-template">
-
-<div class="leiter-card">
-
-<div class="status"></div>
-
-<div class="content">
-
-<h2 class="nummer"></h2>
-
-<p class="kunde"></p>
-
-<p class="standort"></p>
-
-<div class="details">
-
-<span class="hersteller"></span>
-
-<span class="baujahr"></span>
-
-<span class="hoehe"></span>
-
-<span class="sprossen"></span>
-
-</div>
-
-</div>
-
-<div class="arrow">
-
-➜
-
-</div>
-
-</div>
-
+    <div class="leiter-card">
+        <div class="status"></div>
+        <div class="content">
+            <h2 class="nummer"></h2>
+            <p class="kunde"></p>
+            <p class="standort"></p>
+            <div class="details">
+                <span class="hersteller"></span>
+                <span class="baujahr"></span>
+                <span class="hoehe"></span>
+                <span class="sprossen"></span>
+            </div>
+        </div>
+        <div class="arrow">➜</div>
+    </div>
 </template>
 
-
-
 <script src="app.js"></script>
-
 </body>
 
-</html><!doctype html><html lang='de'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>SteigleiterCheck</title><link rel='stylesheet' href='style.css'></head><body><header><h1>🪜 SteigleiterCheck</h1><p>IndustryServiceHuber</p></header><input id='search' placeholder='Steigleiter suchen...'><div id='list'></div><script src='app.js'></script></body></html>
+</html>
