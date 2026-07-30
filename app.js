@@ -1,6 +1,6 @@
 // ======================================================
 // SteigleiterCheck v0.2
-// app.js
+// app.js (fixed)
 // ======================================================
 
 const cards = document.getElementById("cards");
@@ -14,19 +14,13 @@ let leitern = [];
 // -------------------------------
 
 async function ladeLeitern() {
-
     try {
-
         const response = await fetch("data/leitern.json");
-
+        if (!response.ok) throw new Error("Netzwerkfehler beim Laden der Daten");
         leitern = await response.json();
-
         renderLeitern(leitern);
-
     } catch (error) {
-
         console.error(error);
-
         cards.innerHTML = `
         <div class="leiter-card">
             <div class="content">
@@ -35,9 +29,7 @@ async function ladeLeitern() {
             </div>
         </div>
         `;
-
     }
-
 }
 
 // -------------------------------
@@ -45,68 +37,53 @@ async function ladeLeitern() {
 // -------------------------------
 
 function renderLeitern(daten) {
-
     cards.innerHTML = "";
 
     daten.forEach(leiter => {
-
         const clone = template.content.cloneNode(true);
 
-        clone.querySelector(".nummer").textContent =
-            leiter.nummer;
-
-        clone.querySelector(".kunde").textContent =
-            leiter.kunde;
-
-        clone.querySelector(".standort").textContent =
-            leiter.standort;
-
-        clone.querySelector(".hersteller").textContent =
-            "🏭 " + leiter.hersteller;
-
-        clone.querySelector(".baujahr").textContent =
-            "📅 " + leiter.baujahr;
-
-        clone.querySelector(".hoehe").textContent =
-            "📏 " + leiter.hoehe;
-
-        clone.querySelector(".sprossen").textContent =
-            "🪜 " + leiter.sprossen + " Sprossen";
+        clone.querySelector(".nummer").textContent = leiter.nummer || "–";
+        clone.querySelector(".kunde").textContent = leiter.kunde || "–";
+        clone.querySelector(".standort").textContent = leiter.standort || "–";
+        clone.querySelector(".hersteller").textContent = "🏭 " + (leiter.hersteller || "–");
+        clone.querySelector(".baujahr").textContent = "📅 " + (leiter.baujahr || "–");
+        clone.querySelector(".hoehe").textContent = "📏 " + (leiter.hoehe || "–");
+        clone.querySelector(".sprossen").textContent = "🪜 " + ((leiter.sprossen !== undefined) ? leiter.sprossen + " Sprossen" : "–");
 
         const status = clone.querySelector(".status");
+        // Remove previous status classes (in case template re-used)
+        status.classList.remove("yellow", "red", "green");
 
-        switch (leiter.status) {
-
+        switch ((leiter.status || "").toLowerCase()) {
             case "gelb":
                 status.classList.add("yellow");
                 break;
-
             case "rot":
                 status.classList.add("red");
                 break;
-
-            default:
+            case "gruen":
+            case "grün":
+            case "green":
+                status.classList.add("green");
                 break;
-
+            default:
+                // no status class
+                break;
         }
 
-        clone.querySelector(".leiter-card")
-            .addEventListener("click", () => {
-
+        const card = clone.querySelector(".leiter-card");
+        if (card) {
+            card.addEventListener("click", () => {
                 // später Detailseite
-
                 alert(
                     "Steigleiter " +
-                    leiter.nummer +
+                    (leiter.nummer || "") +
                     "\n\nDiese Seite bauen wir als Nächstes."
                 );
-
             });
-
-        cards.appendChild(clone);
-
+            cards.appendChild(clone);
+        }
     });
-
 }
 
 // -------------------------------
@@ -114,33 +91,25 @@ function renderLeitern(daten) {
 // -------------------------------
 
 search.addEventListener("input", () => {
+    const text = (search.value || "").toLowerCase();
 
-    const text =
-        search.value.toLowerCase();
+    const gefiltert = leitern.filter(leiter => {
+        const nummer = (leiter.nummer || "").toLowerCase();
+        const kunde = (leiter.kunde || "").toLowerCase();
+        const standort = (leiter.standort || "").toLowerCase();
+        const hersteller = (leiter.hersteller || "").toLowerCase();
 
-    const gefiltert =
-        leitern.filter(leiter =>
-
-            leiter.nummer.toLowerCase().includes(text)
-
-            ||
-
-            leiter.kunde.toLowerCase().includes(text)
-
-            ||
-
-            leiter.standort.toLowerCase().includes(text)
-
-            ||
-
-            leiter.hersteller.toLowerCase().includes(text)
-
+        return (
+            nummer.includes(text) ||
+            kunde.includes(text) ||
+            standort.includes(text) ||
+            hersteller.includes(text)
         );
+    });
 
     renderLeitern(gefiltert);
-
 });
 
 // -------------------------------
 
-ladeLeitern();fetch('data/leitern.json').then(r=>r.json()).then(d=>{const l=document.getElementById('list');const s=document.getElementById('search');const draw=f=>{l.innerHTML='';d.filter(x=>JSON.stringify(x).toLowerCase().includes((f||'').toLowerCase())).forEach(x=>{let c=document.createElement('div');c.className='card';c.innerHTML='<b>'+x.nummer+'</b><br>'+x.kunde+'<br>'+x.standort+'<br>'+x.hersteller;l.appendChild(c);});};draw('');s.oninput=e=>draw(e.target.value);});
+ladeLeitern();

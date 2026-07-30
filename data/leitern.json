@@ -1,32 +1,32 @@
-[{"nummer":"STL-0001","kunde":"Musterkunde","standort":"Halle 1","hersteller":"ZARGES","baujahr":2019,"hoehe":"8.4 m","sprossen":31}][
-    {
-        "nummer": "STL-0001",
-        "kunde": "Muster GmbH",
-        "standort": "Halle Nord",
-        "hersteller": "ZARGES",
-        "baujahr": 2019,
-        "hoehe": "8,40 m",
-        "sprossen": 31,
-        "status": "gruen"
-    },
-    {
-        "nummer": "STL-0002",
-        "kunde": "Kläranlage Augsburg",
-        "standort": "Becken 3",
-        "hersteller": "MUNK",
-        "baujahr": 2016,
-        "hoehe": "5,20 m",
-        "sprossen": 18,
-        "status": "gelb"
-    },
-    {
-        "nummer": "STL-0003",
-        "kunde": "Industriepark Süd",
-        "standort": "Tank 7",
-        "hersteller": "ZARGES",
-        "baujahr": 2013,
-        "hoehe": "10,10 m",
-        "sprossen": 36,
-        "status": "rot"
-    }
+[
+  {
+    "nummer": "STL-0001",
+    "kunde": "Muster GmbH",
+    "standort": "Halle Nord",
+    "hersteller": "ZARGES",
+    "baujahr": 2019,
+    "hoehe": "8.40 m",
+    "sprossen": 31,
+    "status": "gruen"
+  },
+  {
+    "nummer": "STL-0002",
+    "kunde": "Kläranlage Augsburg",
+    "standort": "Becken 3",
+    "hersteller": "MUNK",
+    "baujahr": 2016,
+    "hoehe": "5.20 m",
+    "sprossen": 18,
+    "status": "gelb"
+  },
+  {
+    "nummer": "STL-0003",
+    "kunde": "Industriepark Süd",
+    "standort": "Tank 7",
+    "hersteller": "ZARGES",
+    "baujahr": 2013,
+    "hoehe": "10.10 m",
+    "sprossen": 36,
+    "status": "rot"
+  }
 ]
